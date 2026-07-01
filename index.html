@@ -12,8 +12,8 @@
     --paper:#f3efe6;
     --paper-2:#eae4d6;
     --rule:#c9c0ac;
-    --accent:#9b2226;     /* oxblood — legal/red-flag */
-    --accent-2:#1f3a5f;   /* statute blue */
+    --accent:#9b2226;
+    --accent-2:#1f3a5f;
     --gold:#a9852f;
     --muted:#5a564c;
     --green:#2f5d3a;
@@ -42,7 +42,6 @@
     flex-direction:column;
     box-shadow:0 1px 0 #fff inset, 0 14px 34px rgba(20,23,26,.10);
   }
-  /* faint laid-paper texture */
   .slide::after{
     content:"";position:absolute;inset:0;pointer-events:none;
     background-image:repeating-linear-gradient(180deg, rgba(20,23,26,.018) 0 1px, transparent 1px 26px);
@@ -121,7 +120,6 @@
   .statline{display:flex;gap:18px;align-items:flex-start;margin-bottom:22px;}
   .statline .txt{font-size:1.05rem;line-height:1.35;color:var(--ink);padding-top:4px;}
 
-  /* timeline */
   .timeline{position:relative;margin-top:10px;padding-left:4px;flex:1;}
   .tl{display:grid;grid-template-columns:120px 1fr;gap:18px;padding:13px 0;border-bottom:1px solid var(--rule);}
   .tl:last-child{border-bottom:none;}
@@ -143,7 +141,6 @@
 
   .footer-tag{position:absolute;bottom:20px;left:64px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
 
-  /* cover */
   .cover{justify-content:center;background:var(--ink);color:var(--paper);}
   .cover::after{opacity:.5;}
   .cover .kicker{color:#e0a3a5;}
@@ -155,14 +152,12 @@
   .citno{font-family:'IBM Plex Mono',monospace;font-size:.78em;color:var(--accent);vertical-align:super;font-weight:600;}
   .cover .citno{color:#e0a3a5;}
 
-  /* ===== NEWSPRINT RANSOM COVER ===== */
   .news{
     background:#dcdcd6;
     justify-content:flex-start;
     padding:0;
     color:#111;
   }
-  /* dense newsprint bed built from repeating mono text */
   .news .bed{
     position:absolute;inset:0;
     font-family:'IBM Plex Mono',monospace;
@@ -202,10 +197,8 @@
     letter-spacing:-.01em;
     line-height:.96;
     white-space:nowrap;
-    /* torn-edge top & bottom */
     clip-path:polygon(0% 8%,4% 0,9% 7%,15% 1%,22% 8%,30% 2%,38% 9%,46% 1%,54% 8%,62% 2%,70% 9%,78% 1%,86% 8%,93% 1%,98% 7%,100% 2%,100% 92%,96% 100%,90% 93%,83% 99%,75% 92%,67% 99%,58% 92%,50% 99%,42% 92%,34% 99%,26% 93%,18% 99%,11% 92%,5% 99%,0% 93%);
   }
-  /* faint print lines showing through each strip */
   .strip::before{
     content:"";position:absolute;inset:0;z-index:-0;
     background:repeating-linear-gradient(180deg, rgba(0,0,0,.045) 0 1px, transparent 1px 5px);
@@ -233,7 +226,6 @@
   }
   .news .credit .chip{background:#fbfbf8;padding:5px 12px;box-shadow:1px 2px 6px rgba(0,0,0,.22);}
   .news .credit .chip b{color:#9b2226;font-weight:600;}
-  /* outlet byline + company tag inside strips */
   .strip .byline{
     display:block;font-family:'IBM Plex Mono',monospace;font-weight:500;
     font-size:.42em;letter-spacing:.1em;text-transform:uppercase;color:#9b2226;
@@ -283,11 +275,10 @@
     </div>
   </section>
   <script>
-    // dense newsprint bed — repeated subject keyword fragments, a few bolded
     (function(){
       const frag = ["app store","age verification","parental consent","Snap Inc.","minor accounts","First Amendment","anonymous speech","FTC enforcement","Quick Add","sextortion","preemption","age category","Apple","Google","safe harbor","Mike Lee","John James","Texas sues","New Mexico","decoy account","SCOPE Act","chilling effect","strict scrutiny","data breach","biometric scan","zero-knowledge","double-blind","Snapstreaks","addictive design","gatekeeper","commercially reasonable","verifiable consent","content neutral","de-anonymize","Digital Childhood","88% of parents","push notification","ephemeral content"];
       const bold = new Set(["First Amendment","sextortion","age verification","Texas sues","gatekeeper","Snap Inc.","decoy account"]);
-      let out=""; 
+      let out="";
       for(let i=0;i<900;i++){
         const w=frag[Math.floor(Math.random()*frag.length)];
         out += bold.has(w) ? "<b>"+w+".</b> " : w+". ";
@@ -381,59 +372,37 @@
           <path d="M0,0 L10,5 L0,10 z" fill="#9b2226"/>
         </marker>
       </defs>
-
-      <!-- Step 1: account creation -->
       <rect x="20" y="20" width="200" height="66" rx="6" fill="#fbfbf8" stroke="#16171a" stroke-width="1.5"/>
       <text x="120" y="46" text-anchor="middle" font-size="15" font-weight="700">Account created</text>
       <text x="120" y="68" text-anchor="middle" font-size="12.5" fill="#5a564c">Store requests age info (§3)</text>
-
-      <!-- Step 2: verify age (decision diamond) -->
       <polygon points="395,53 470,20 545,53 470,86" fill="#eef1f6" stroke="#1f3a5f" stroke-width="1.5"/>
       <text x="470" y="50" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1f3a5f">Verify age</text>
       <text x="470" y="67" text-anchor="middle" font-size="11.5" fill="#1f3a5f">category</text>
-
-      <!-- arrow 1->2 -->
       <line x1="220" y1="53" x2="392" y2="53" stroke="#1f3a5f" stroke-width="1.6" marker-end="url(#arr)"/>
-
-      <!-- Adult branch -->
       <rect x="700" y="20" width="200" height="66" rx="6" fill="#fbfbf8" stroke="#2f5d3a" stroke-width="1.5"/>
       <text x="800" y="46" text-anchor="middle" font-size="15" font-weight="700" fill="#2f5d3a">Adult (18+)</text>
       <text x="800" y="68" text-anchor="middle" font-size="12.5" fill="#5a564c">Proceeds to download</text>
       <line x1="545" y1="53" x2="697" y2="53" stroke="#1f3a5f" stroke-width="1.6" marker-end="url(#arr)"/>
       <text x="620" y="44" text-anchor="middle" font-size="11" font-weight="600" fill="#2f5d3a" font-family="'IBM Plex Mono',monospace">ADULT</text>
-
-      <!-- Minor branch down -->
       <line x1="470" y1="86" x2="470" y2="128" stroke="#1f3a5f" stroke-width="1.6" marker-end="url(#arr)"/>
       <text x="500" y="112" text-anchor="start" font-size="11" font-weight="600" fill="#9b2226" font-family="'IBM Plex Mono',monospace">MINOR (&lt;18)</text>
-
-      <!-- Step 3: parental account -->
       <rect x="345" y="130" width="250" height="62" rx="6" fill="#fbfbf8" stroke="#16171a" stroke-width="1.5"/>
       <text x="470" y="156" text-anchor="middle" font-size="14.5" font-weight="700">Link to parental account</text>
       <text x="470" y="177" text-anchor="middle" font-size="12.5" fill="#5a564c">Verified adult, §3(a)(2)(A)</text>
-
-      <!-- Step 4: consent -->
       <line x1="470" y1="192" x2="470" y2="226" stroke="#1f3a5f" stroke-width="1.6" marker-end="url(#arr)"/>
       <rect x="320" y="228" width="300" height="70" rx="6" fill="#fbfbf8" stroke="#16171a" stroke-width="1.5"/>
       <text x="470" y="255" text-anchor="middle" font-size="14.5" font-weight="700">Verifiable parental consent</text>
       <text x="470" y="277" text-anchor="middle" font-size="12.5" fill="#5a564c">After disclosure of data use</text>
       <text x="470" y="293" text-anchor="middle" font-size="12.5" fill="#5a564c">and age rating, §3(a)(2)(B)</text>
-
-      <!-- Step 5: download -->
       <line x1="620" y1="263" x2="700" y2="263" stroke="#1f3a5f" stroke-width="1.6" marker-end="url(#arr)"/>
       <rect x="700" y="232" width="200" height="62" rx="6" fill="#eef4ef" stroke="#2f5d3a" stroke-width="1.5"/>
       <text x="800" y="258" text-anchor="middle" font-size="15" font-weight="700" fill="#2f5d3a">Download approved</text>
       <text x="800" y="279" text-anchor="middle" font-size="12.5" fill="#5a564c">Store signals category</text>
-
-      <!-- Ongoing loop label -->
       <text x="40" y="338" font-size="12" font-weight="700" font-family="'IBM Plex Mono',monospace" letter-spacing="0.12em" fill="#9b2226">ONGOING DUTIES</text>
       <line x1="40" y1="348" x2="1020" y2="348" stroke="#c9c0ac" stroke-width="1"/>
-
-      <!-- Loop A: significant change -->
       <rect x="40" y="362" width="470" height="52" rx="6" fill="#fdf3f3" stroke="#9b2226" stroke-width="1.3"/>
       <text x="58" y="384" font-size="13.5" font-weight="700" fill="#9b2226">Significant change</text>
       <text x="58" y="403" font-size="12" fill="#5a564c">New data use, monetization, or rating → re-obtain consent (§3(a)(3))</text>
-
-      <!-- Loop B: revocation -->
       <rect x="550" y="362" width="470" height="52" rx="6" fill="#fdf3f3" stroke="#9b2226" stroke-width="1.3"/>
       <text x="568" y="384" font-size="13.5" font-weight="700" fill="#9b2226">Parent revokes consent</text>
       <text x="568" y="403" font-size="12" fill="#5a564c">Store must notify the developer; access ends (§3(a)(5))</text>
@@ -489,7 +458,7 @@
     <div class="src"><a href="https://www.congress.gov/bill/119th-congress/house-bill/3149/text" target="_blank">Congress.gov H.R.3149 §§3–4</a> · <a href="https://www.cnn.com/2025/05/01/tech/proposed-legislation-app-store-age-verification-lee-james" target="_blank">CNN Business (5/1/25)</a></div>
   </section>
 
-  <!-- 10 — RAMIFICATIONS DIVIDER -->
+  <!-- 11 — RAMIFICATIONS DIVIDER -->
   <section class="slide" style="justify-content:center;background:var(--ink);color:var(--paper);">
     <div class="kicker" style="color:#e0a3a5;">Part Three</div>
     <h1 style="font-size:3.2rem;max-width:18ch;color:var(--paper);">Potential Ramifications</h1>
@@ -551,7 +520,7 @@
     <div class="src">64. <a href="https://www.yoti.com/blog/texas-app-store-accountability-act-age-assurance/" target="_blank">Yoti, quoting Apple &amp; Google statements (7/1/25)</a> · <a href="https://www.americanactionforum.org/insight/the-app-store-accountability-act-and-age-verification-mandates/" target="_blank">AAF / Westling (5/7/25)</a></div>
   </section>
 
-  <!-- 13 — POSSIBLE SOLUTIONS -->
+  <!-- 14 — POSSIBLE SOLUTIONS -->
   <section class="slide">
     <span class="slidenum">14</span>
     <div class="kicker green">Possible Solutions</div>
@@ -565,7 +534,7 @@
     <div class="src"><a href="https://www.americanactionforum.org/insight/the-app-store-accountability-act-and-age-verification-mandates/" target="_blank">AAF / Westling (5/7/25)</a>, on age-assurance and double-blind verification</div>
   </section>
 
-  <!-- 14 — TAKEAWAYS -->
+  <!-- 15 — TAKEAWAYS -->
   <section class="slide">
     <span class="slidenum">15</span>
     <h2 style="font-size:2.1rem;margin-bottom:24px;">Conclusion</h2>
@@ -577,7 +546,7 @@
     <div class="footer-tag">App Store Accountability Act</div>
   </section>
 
-  <!-- 15 — DISCUSSION -->
+  <!-- 16 — DISCUSSION -->
   <section class="slide cover" style="justify-content:center;">
     <h1 style="font-size:3.6rem;max-width:20ch;">Questions &amp; Discussion</h1>
     <div class="meta">
@@ -586,5 +555,125 @@
   </section>
 
 </div>
+<style>
+  /* ===== PRESENTER SHELL ===== */
+  body{overflow:hidden;height:100vh;}
+  .deck{
+    max-width:none;margin:0;padding:0;
+    height:100vh;width:100vw;
+    display:flex;align-items:center;justify-content:center;
+  }
+  /* each slide becomes a full-viewport stage; only .active shows */
+  .deck .slide{
+    display:none !important;
+    margin:0;
+    width:min(96vw, calc((100vh - 40px) * 16 / 9));
+    height:auto;
+    max-height:calc(100vh - 40px);
+    box-shadow:0 20px 60px rgba(20,23,26,.35);
+  }
+  .deck .slide.active{display:flex !important;}
+
+  /* nav arrows */
+  .navbtn{
+    position:fixed;top:50%;transform:translateY(-50%);
+    z-index:1000;
+    width:52px;height:52px;border-radius:50%;
+    border:none;cursor:pointer;
+    background:rgba(22,23,26,.72);color:#f3efe6;
+    font-size:22px;line-height:1;
+    display:flex;align-items:center;justify-content:center;
+    transition:background .15s, opacity .15s;
+    font-family:'IBM Plex Mono',monospace;
+  }
+  .navbtn:hover{background:var(--accent);}
+  .navbtn:disabled{opacity:.22;cursor:default;}
+  .navbtn:disabled:hover{background:rgba(22,23,26,.72);}
+  #prevBtn{left:20px;}
+  #nextBtn{right:20px;}
+
+  /* counter */
+  .counter{
+    position:fixed;bottom:18px;left:50%;transform:translateX(-50%);
+    z-index:1000;
+    background:rgba(22,23,26,.72);color:#f3efe6;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.1em;
+    padding:7px 16px;border-radius:20px;
+  }
+  .counter b{color:#e0a3a5;font-weight:600;}
+
+  /* fullscreen button */
+  #fsBtn{
+    position:fixed;top:18px;right:20px;z-index:1000;
+    background:rgba(22,23,26,.72);color:#f3efe6;
+    border:none;cursor:pointer;border-radius:8px;
+    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;
+    padding:8px 12px;transition:background .15s;
+  }
+  #fsBtn:hover{background:var(--accent);}
+
+  /* progress bar */
+  .progress{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:1001;transition:width .2s ease;}
+
+  @media (max-width:760px){
+    .deck .slide{width:96vw;max-height:none;min-height:0;aspect-ratio:16/9;}
+    .navbtn{width:42px;height:42px;font-size:18px;}
+    #prevBtn{left:8px;} #nextBtn{right:8px;}
+  }
+</style>
+
+<button class="navbtn" id="prevBtn" aria-label="Previous slide">&#8249;</button>
+<button class="navbtn" id="nextBtn" aria-label="Next slide">&#8250;</button>
+<button id="fsBtn">&#9974; Fullscreen</button>
+<div class="counter"><b id="cur">1</b> / <span id="total">16</span></div>
+<div class="progress" id="progress"></div>
+
+<script>
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.deck .slide'));
+  var idx = 0;
+  var curEl = document.getElementById('cur');
+  var totalEl = document.getElementById('total');
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var progress = document.getElementById('progress');
+  totalEl.textContent = slides.length;
+
+  function show(n){
+    idx = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function(s,i){ s.classList.toggle('active', i === idx); });
+    curEl.textContent = idx + 1;
+    prevBtn.disabled = idx === 0;
+    nextBtn.disabled = idx === slides.length - 1;
+    progress.style.width = ((idx + 1) / slides.length * 100) + '%';
+    // scroll the active slide to top in case it's tall on mobile
+    slides[idx].scrollTop = 0;
+  }
+  function next(){ if(idx < slides.length - 1) show(idx + 1); }
+  function prev(){ if(idx > 0) show(idx - 1); }
+
+  nextBtn.addEventListener('click', next);
+  prevBtn.addEventListener('click', prev);
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); next(); }
+    else if(e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+    else if(e.key === 'Home') { e.preventDefault(); show(0); }
+    else if(e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+  });
+
+  // fullscreen
+  var fsBtn = document.getElementById('fsBtn');
+  fsBtn.addEventListener('click', function(){
+    if(!document.fullscreenElement){
+      (document.documentElement.requestFullscreen || function(){}).call(document.documentElement);
+    } else {
+      (document.exitFullscreen || function(){}).call(document);
+    }
+  });
+
+  show(0);
+})();
+</script>
 </body>
 </html>

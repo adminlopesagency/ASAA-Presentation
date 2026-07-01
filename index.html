@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The App Store Accountability Act — Seminar Presentation</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --ink:#16171a;
+    --paper:#f3efe6;
+    --paper-2:#eae4d6;
+    --rule:#c9c0ac;
+    --accent:#9b2226;     /* oxblood — legal/red-flag */
+    --accent-2:#1f3a5f;   /* statute blue */
+    --gold:#a9852f;
+    --muted:#5a564c;
+    --green:#2f5d3a;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper-2);
+    font-family:'Newsreader',Georgia,serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .deck{max-width:1180px;margin:0 auto;padding:32px 20px 80px;}
+
+  .slide{
+    position:relative;
+    background:var(--paper);
+    border:1px solid var(--rule);
+    aspect-ratio:16/9;
+    margin:0 0 28px;
+    padding:54px 64px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 1px 0 #fff inset, 0 14px 34px rgba(20,23,26,.10);
+  }
+  /* faint laid-paper texture */
+  .slide::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:repeating-linear-gradient(180deg, rgba(20,23,26,.018) 0 1px, transparent 1px 26px);
+    mix-blend-mode:multiply;
+  }
+
+  .slidenum{
+    position:absolute;top:22px;right:26px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;letter-spacing:.14em;color:var(--muted);
+  }
+  .kicker{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--accent);display:flex;align-items:center;gap:12px;
+    margin-bottom:20px;
+  }
+  .kicker::before{content:"";width:34px;height:2px;background:var(--accent);display:inline-block;}
+  .kicker.blue{color:var(--accent-2);}
+  .kicker.blue::before{background:var(--accent-2);}
+  .kicker.green{color:var(--green);}
+  .kicker.green::before{background:var(--green);}
+
+  h1{font-family:'Fraunces',serif;font-weight:900;line-height:.97;letter-spacing:-.015em;}
+  h2{font-family:'Fraunces',serif;font-weight:600;line-height:1.02;letter-spacing:-.01em;}
+  .lede{font-size:1.32rem;line-height:1.42;color:var(--ink);max-width:62ch;}
+  .muted{color:var(--muted);}
+  p{font-size:1.12rem;line-height:1.46;}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:38px;flex:1;align-content:start;}
+  .cols-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;flex:1;align-content:start;}
+
+  .card{border-top:2px solid var(--ink);padding-top:14px;}
+  .card.red{border-color:var(--accent);}
+  .card.blue{border-color:var(--accent-2);}
+  .card.green{border-color:var(--green);}
+  .card h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.18rem;margin-bottom:8px;}
+  .card p{font-size:1.02rem;line-height:1.4;color:var(--muted);}
+
+  ul.brief{list-style:none;margin-top:8px;}
+  ul.brief li{
+    position:relative;padding-left:30px;margin-bottom:15px;
+    font-size:1.1rem;line-height:1.4;
+  }
+  ul.brief li::before{
+    content:"§";position:absolute;left:0;top:-1px;
+    font-family:'Fraunces',serif;color:var(--accent);font-weight:700;font-size:1.15rem;
+  }
+  ul.check li::before{content:"→";color:var(--green);font-family:'IBM Plex Mono',monospace;}
+  ul.check.opp li::before{color:var(--accent);}
+  ul.dot{list-style:none;margin-top:8px;}
+  ul.dot li{position:relative;padding-left:22px;margin-bottom:14px;font-size:1.06rem;line-height:1.4;}
+  ul.dot li::before{content:"";position:absolute;left:2px;top:.6em;width:6px;height:6px;border-radius:50%;background:var(--accent-2);}
+  .quoteband{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:20px;border-top:1px solid var(--rule);padding-top:16px;}
+  .qcol{margin-top:16px;display:flex;flex-direction:column;gap:12px;}
+  .qcol .q{border-left:3px solid var(--accent);padding-left:12px;}
+  .qcol .q .who{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:3px;}
+  .qcol .q p{font-size:.92rem;line-height:1.32;font-style:italic;color:var(--ink);}
+  .quoteband .q{border-left:3px solid var(--accent);padding-left:14px;}
+  .quoteband .q .who{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:5px;}
+  .quoteband .q p{font-size:1rem;line-height:1.36;font-style:italic;color:var(--ink);}
+
+  .label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
+
+  .pull{
+    font-family:'Fraunces',serif;font-weight:500;font-style:normal;
+    font-size:1.7rem;line-height:1.22;letter-spacing:-.01em;
+    border-left:3px solid var(--accent);padding-left:22px;max-width:30ch;
+  }
+  .src{margin-top:auto;padding-top:14px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;color:var(--muted);border-top:1px solid var(--rule);}
+  .src a{color:var(--accent-2);text-decoration:none;border-bottom:1px dotted var(--accent-2);}
+  .src a:hover{color:var(--accent);border-bottom-color:var(--accent);}
+
+  .bignum{font-family:'Fraunces',serif;font-weight:900;font-size:3.3rem;line-height:.9;color:var(--accent);letter-spacing:-.02em;min-width:118px;flex:0 0 118px;}
+  .bignum.blue{color:var(--accent-2);}
+  .statline{display:flex;gap:18px;align-items:flex-start;margin-bottom:22px;}
+  .statline .txt{font-size:1.05rem;line-height:1.35;color:var(--ink);padding-top:4px;}
+
+  /* timeline */
+  .timeline{position:relative;margin-top:10px;padding-left:4px;flex:1;}
+  .tl{display:grid;grid-template-columns:120px 1fr;gap:18px;padding:13px 0;border-bottom:1px solid var(--rule);}
+  .tl:last-child{border-bottom:none;}
+  .tl .when{font-family:'IBM Plex Mono',monospace;font-size:.9rem;color:var(--accent);font-weight:500;}
+  .tl .what{font-size:1.04rem;line-height:1.38;}
+  .tl .what b{font-family:'Fraunces',serif;font-weight:600;}
+
+  .scale{display:flex;align-items:stretch;gap:0;border:1px solid var(--ink);margin-top:6px;}
+  .scale > div{flex:1;padding:14px 16px;border-right:1px solid var(--rule);}
+  .scale > div:last-child{border-right:none;}
+  .scale .age{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:.95rem;color:var(--accent-2);}
+  .scale .name{font-family:'Fraunces',serif;font-size:1.05rem;margin-top:3px;}
+
+  .vs{display:grid;grid-template-columns:1fr auto 1fr;gap:0;flex:1;}
+  .vs .side{padding:4px 30px;}
+  .vs .side:first-child{padding-left:0;}
+  .vs .divider{width:1px;background:var(--rule);}
+  .vs h3{font-family:'Fraunces',serif;font-size:1.32rem;margin-bottom:16px;}
+
+  .footer-tag{position:absolute;bottom:20px;left:64px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
+
+  /* cover */
+  .cover{justify-content:center;background:var(--ink);color:var(--paper);}
+  .cover::after{opacity:.5;}
+  .cover .kicker{color:#e0a3a5;}
+  .cover .kicker::before{background:#e0a3a5;}
+  .cover h1{color:var(--paper);font-size:4.6rem;}
+  .cover .sub{font-size:1.35rem;color:#cfc8b8;margin-top:22px;max-width:58ch;line-height:1.4;}
+  .cover .meta{margin-top:38px;display:flex;gap:34px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;color:#9a9587;text-transform:uppercase;}
+  .cover .meta b{color:var(--paper);font-weight:500;}
+  .citno{font-family:'IBM Plex Mono',monospace;font-size:.78em;color:var(--accent);vertical-align:super;font-weight:600;}
+  .cover .citno{color:#e0a3a5;}
+
+  /* ===== NEWSPRINT RANSOM COVER ===== */
+  .news{
+    background:#dcdcd6;
+    justify-content:flex-start;
+    padding:0;
+    color:#111;
+  }
+  /* dense newsprint bed built from repeating mono text */
+  .news .bed{
+    position:absolute;inset:0;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:7.5px;line-height:1.7;
+    color:#7d7d78;
+    columns:7;column-gap:14px;
+    padding:14px 16px;
+    overflow:hidden;
+    user-select:none;
+    text-align:justify;
+    opacity:.85;
+    filter:contrast(1.05);
+    -webkit-mask-image:radial-gradient(120% 120% at 50% 40%, #000 60%, rgba(0,0,0,.55) 100%);
+            mask-image:radial-gradient(120% 120% at 50% 40%, #000 60%, rgba(0,0,0,.55) 100%);
+  }
+  .news .bed b{color:#3a3a36;}
+  .news::after{
+    background-image:repeating-linear-gradient(180deg, rgba(0,0,0,.03) 0 1px, transparent 1px 3px);
+    opacity:.5;
+  }
+  .news .strips{
+    position:relative;z-index:2;
+    width:100%;height:100%;
+    display:flex;flex-direction:column;
+    justify-content:center;align-items:center;
+    gap:0;
+    padding:42px 40px;
+  }
+  .strip{
+    position:relative;
+    background:#fbfbf8;
+    padding:8px 26px;
+    box-shadow:2px 4px 9px rgba(0,0,0,.28);
+    font-family:'Fraunces',serif;
+    font-weight:900;
+    color:#0a0a0a;
+    letter-spacing:-.01em;
+    line-height:.96;
+    white-space:nowrap;
+    /* torn-edge top & bottom */
+    clip-path:polygon(0% 8%,4% 0,9% 7%,15% 1%,22% 8%,30% 2%,38% 9%,46% 1%,54% 8%,62% 2%,70% 9%,78% 1%,86% 8%,93% 1%,98% 7%,100% 2%,100% 92%,96% 100%,90% 93%,83% 99%,75% 92%,67% 99%,58% 92%,50% 99%,42% 92%,34% 99%,26% 93%,18% 99%,11% 92%,5% 99%,0% 93%);
+  }
+  /* faint print lines showing through each strip */
+  .strip::before{
+    content:"";position:absolute;inset:0;z-index:-0;
+    background:repeating-linear-gradient(180deg, rgba(0,0,0,.045) 0 1px, transparent 1px 5px);
+    pointer-events:none;
+  }
+  .strip span{position:relative;}
+
+  .s-fin{font-size:1.55rem;transform:rotate(-3.5deg);align-self:flex-start;margin-left:6%;}
+  .s-warm{font-size:1.85rem;transform:rotate(2.5deg);align-self:flex-end;margin-right:4%;margin-top:-6px;}
+  .s-title{
+    font-size:3.5rem;letter-spacing:-.02em;padding:14px 40px;transform:rotate(-1deg);
+    margin:18px 0;z-index:3;box-shadow:3px 7px 16px rgba(0,0,0,.32);
+  }
+  .s-title .small{display:block;font-size:1.15rem;font-weight:600;letter-spacing:.02em;color:#9b2226;margin-top:6px;font-style:normal;}
+  .s-shock{font-size:1.5rem;transform:rotate(3deg);align-self:flex-start;margin-left:10%;}
+  .s-explode{font-size:2.5rem;transform:rotate(-2.5deg);align-self:flex-end;margin-right:8%;margin-top:-4px;}
+  .s-meltdown{font-size:1.7rem;transform:rotate(2deg);align-self:flex-start;margin-left:18%;}
+  .s-storms{font-size:1.25rem;transform:rotate(-2deg);align-self:flex-end;margin-right:14%;}
+
+  .news .credit{
+    position:absolute;bottom:18px;left:0;right:0;z-index:4;
+    display:flex;justify-content:center;gap:26px;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:#2a2a26;
+  }
+  .news .credit .chip{background:#fbfbf8;padding:5px 12px;box-shadow:1px 2px 6px rgba(0,0,0,.22);}
+  .news .credit .chip b{color:#9b2226;font-weight:600;}
+  /* outlet byline + company tag inside strips */
+  .strip .byline{
+    display:block;font-family:'IBM Plex Mono',monospace;font-weight:500;
+    font-size:.42em;letter-spacing:.1em;text-transform:uppercase;color:#9b2226;
+    margin-top:5px;
+  }
+  .strip .co{
+    display:inline-block;font-family:'IBM Plex Mono',monospace;font-weight:600;
+    font-size:.78em;letter-spacing:.02em;color:#0a0a0a;
+    border:1.5px solid #0a0a0a;border-radius:4px;padding:1px 7px;margin-left:2px;
+    vertical-align:middle;
+  }
+
+  @media (max-width:760px){
+    .slide{padding:30px 26px;aspect-ratio:auto;min-height:78vh;}
+    .cols,.cols-3,.vs{grid-template-columns:1fr;gap:20px;}
+    .vs .divider{display:none;}
+    .vs .side{padding:0;}
+    .cover h1{font-size:2.6rem;}
+    h1{font-size:2.2rem;}
+    .tl{grid-template-columns:90px 1fr;}
+    .footer-tag{display:none;}
+    .news .bed{columns:3;}
+    .s-title{font-size:2rem;padding:10px 20px;}
+    .strip{padding:6px 16px;}
+    .s-fin,.s-warm,.s-shock,.s-explode,.s-meltdown,.s-storms{font-size:1.2rem;margin:0;align-self:center;}
+    .news .strips{gap:6px;}
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- 1 — COVER -->
+  <section class="slide news">
+    <div class="bed" id="newsbed"></div>
+    <div class="strips">
+      <div class="strip s-fin"><span>States Sue TikTok, Saying Its Addictive Features Hook Children<span class="byline">Washington Post · Oct 2024</span></span></div>
+      <div class="strip s-warm"><span>Facebook Knows Instagram Harms Teens<span class="byline">Wall Street Journal · 2021</span></span></div>
+      <div class="strip s-title"><span>The App Store Accountability Act<span class="small">S.1586 / H.R.3149</span></span></div>
+      <div class="strip s-shock"><span>New Mexico Sues Snapchat Over Child Sexual Abuse<span class="byline">CBS News · Sep 2024</span></span></div>
+      <div class="strip s-explode"><span>Sued for "12+" Rating<span class="byline">Courthouse News · Feb 2026</span></span></div>
+      <div class="strip s-meltdown"><span>Meta and YouTube Head to Trial Over Harm to Children<span class="byline">NPR · Jan 2026</span></span></div>
+      <div class="strip s-storms"><span>"Breeding Ground for Predators"<span class="byline">TechPolicy.Press · 2024</span></span></div>
+    </div>
+    <div class="credit">
+      <span class="chip">Emma Richardson</span>
+    </div>
+  </section>
+  <script>
+    // dense newsprint bed — repeated subject keyword fragments, a few bolded
+    (function(){
+      const frag = ["app store","age verification","parental consent","Snap Inc.","minor accounts","First Amendment","anonymous speech","FTC enforcement","Quick Add","sextortion","preemption","age category","Apple","Google","safe harbor","Mike Lee","John James","Texas sues","New Mexico","decoy account","SCOPE Act","chilling effect","strict scrutiny","data breach","biometric scan","zero-knowledge","double-blind","Snapstreaks","addictive design","gatekeeper","commercially reasonable","verifiable consent","content neutral","de-anonymize","Digital Childhood","88% of parents","push notification","ephemeral content"];
+      const bold = new Set(["First Amendment","sextortion","age verification","Texas sues","gatekeeper","Snap Inc.","decoy account"]);
+      let out=""; 
+      for(let i=0;i<900;i++){
+        const w=frag[Math.floor(Math.random()*frag.length)];
+        out += bold.has(w) ? "<b>"+w+".</b> " : w+". ";
+      }
+      document.getElementById('newsbed').innerHTML = out;
+    })();
+  </script>
+
+  <!-- 2 — OVERVIEW -->
+  <section class="slide">
+    <span class="slidenum">02</span>
+    <div class="kicker blue">Overview</div>
+    <h2 style="font-size:2.1rem;margin-bottom:26px;">Outline</h2>
+    <div class="cols-3">
+      <div class="card red"><h3>01 · Context</h3><p>The harms driving the bill: addiction suits, predator cases, and a 14-year-old decoy account.</p></div>
+      <div class="card blue"><h3>02 · The Bill</h3><p>The App Store Accountability Act (S.1586 / H.R.3149): what it requires of stores and developers.</p></div>
+      <div class="card"><h3>03 · Potential Ramifications</h3><p>The constitutional and privacy objections, centered on the First Amendment.</p></div>
+      <div class="card green"><h3>04 · Possible Solutions</h3><p>Narrow tailoring, privacy guardrails, and less-restrictive alternatives.</p></div>
+    </div>
+    <div class="footer-tag">App Store Accountability Act</div>
+  </section>
+
+  <!-- 3 — CONTEXT DIVIDER -->
+  <section class="slide" style="justify-content:center;background:var(--paper-2);">
+    <div class="kicker">Part One</div>
+    <h1 style="font-size:3.4rem;max-width:20ch;">Context</h1>
+    <p class="lede muted" style="margin-top:24px;">A wave of state litigation alleges that the platforms themselves endanger minors, and that today's age "verification" amounts to a child checking a box.</p>
+  </section>
+
+  <!-- 4 — CONTEXT: SNAPCHAT HARMS -->
+  <section class="slide">
+    <span class="slidenum">04</span>
+    <div class="kicker">Context</div>
+    <h2 style="font-size:1.9rem;margin-bottom:22px;"><i>State of New Mexico v. Snap, Inc.</i></h2>
+    <div class="cols">
+      <div>
+        <div class="statline"><div class="bignum">1 day</div><div class="txt">The decoy account "Heather" searched only for other 15-year-olds. Within a day, an adult user contacted her and tried to move the chat off-platform.<span class="citno">33</span></div></div>
+        <div class="statline"><div class="bignum">~100</div><div class="txt">Snapchat then recommended roughly a hundred more users to her private account, many of them adults seeking explicit content.<span class="citno">33</span></div></div>
+      </div>
+      <div>
+        <div class="statline"><div class="bignum blue">&lt;1 min</div><div class="txt">Snap's own internal review concluded that a user needs under a minute on the app to reach a position to buy illegal drugs.<span class="citno">28</span></div></div>
+        <div class="statline"><div class="bignum blue">18 yrs</div><div class="txt">Alejandro Marquez received an 18-year sentence after he raped an 11-year-old girl he met through Snapchat's "Quick Add" feature.<span class="citno">26</span></div></div>
+      </div>
+    </div>
+    <div class="src">26. <a href="https://nmdoj.gov/press-release/attorney-general-raul-torrez-files-lawsuit-against-snap-inc-to-protect-children-from-sextortion-sexual-exploitation-and-other-harms/" target="_blank">NM DOJ release (9/5/24)</a> · 28. <a href="https://nmdoj.gov/press-release/31302/" target="_blank">NM DOJ unredacted filing (10/2/24)</a> · 33. <a href="https://www.techpolicy.press/snapchat-is-a-breeding-ground-for-child-predators-according-to-new-mexico-lawsuit/" target="_blank">TechPolicy.Press (9/5/24)</a></div>
+  </section>
+
+  <!-- 5 — CONTEXT: THE LAWSUITS -->
+  <section class="slide">
+    <span class="slidenum">05</span>
+    <div class="kicker">Context</div>
+    <h2 style="font-size:1.9rem;margin-bottom:18px;">State Action</h2>
+    <div class="timeline">
+      <div class="tl"><div class="when">SEP 2024</div><div class="what"><b>New Mexico</b> sues Snap, alleging its design fosters sextortion and child sexual abuse material, and its algorithm connects minors to predators.</div></div>
+      <div class="tl"><div class="when">OCT 2024</div><div class="what"><b>14 states plus D.C.</b> sue TikTok, alleging it engineered addictive features that hook children and harm their mental health.<span class="citno">42</span></div></div>
+      <div class="tl"><div class="when">2025</div><div class="what"><b>Florida, Utah, Kansas</b> file suit, alleging Snap enabled exploitation through addictive, deceptive design.</div></div>
+      <div class="tl"><div class="when">FEB 2026</div><div class="what"><b>Texas</b> sues Snap under the Deceptive Trade Practices and SCOPE Acts: a "12+" store rating while a test 13-year-old reached explicit content, plus "Snapstreaks" that drive compulsive use.<span class="citno">17,22</span></div></div>
+    </div>
+    <div class="src">17. <a href="https://www.courthousenews.com/texas-ag-accuses-snapchat-of-exposing-minors-to-explicit-content-and-addictive-features/" target="_blank">Courthouse News (2/11/26)</a> · 22. <a href="https://texasscorecard.com/state/texas-sues-snapchat-for-allegedly-misleading-parents-about-app-safety/" target="_blank">Texas Scorecard (2/12/26)</a> · 42. <a href="https://www.npr.org/2024/10/08/g-s1-26823/states-sue-tiktok-child-safety-mental-health" target="_blank">NPR (10/8/24)</a></div>
+  </section>
+
+  <!-- 6 — BILL DIVIDER -->
+  <section class="slide" style="justify-content:center;background:var(--paper-2);">
+    <div class="kicker blue">Part Two · The Bill</div>
+    <h1 style="font-size:3.4rem;max-width:18ch;">The App Store Accountability Act</h1>
+    <p class="lede muted" style="margin-top:24px;">Senate bill S.1586 and House bill H.R.3149, 119th Congress.</p>
+  </section>
+
+  <!-- 7 — WHAT IS IT -->
+  <section class="slide">
+    <span class="slidenum">07</span>
+    <div class="kicker blue">The Bill</div>
+    <h2 style="font-size:2rem;margin-bottom:20px;">App Store Accountability Act</h2>
+    <p class="lede">Senator Mike Lee (R-UT) and Representative John James (R-MI) introduced the <b>App Store Accountability Act</b> in May 2025. The Act treats the <b>app store</b>, rather than each individual app, as the chokepoint for children's online safety.<span class="citno">5,12</span></p>
+    <p class="lede" style="margin-top:18px;">It reaches stores with at least five million U.S. users and takes effect one year after passage.<span class="citno">12</span></p>
+    <div class="src">5. <a href="https://www.lee.senate.gov/2025/5/lee-introduces-bill-to-protect-children-online-hold-app-stores-accountable" target="_blank">Lee Senate release (5/1/25)</a> · 12. <a href="https://www.cnn.com/2025/05/01/tech/proposed-legislation-app-store-age-verification-lee-james" target="_blank">CNN Business (5/1/25)</a></div>
+  </section>
+
+  <!-- 8 — HOW IT WORKS (FLOWCHART) -->
+  <section class="slide">
+    <span class="slidenum">08</span>
+    <div class="kicker blue">The Bill</div>
+    <h2 style="font-size:2rem;margin-bottom:4px;">How a Download Works Under the Act</h2>
+    <p class="muted" style="font-size:1rem;margin-bottom:10px;">The verification and consent chain that runs every time a user reaches for an app.</p>
+    <svg viewBox="0 0 1060 430" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;flex:1;" font-family="'Newsreader',serif">
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#1f3a5f"/>
+        </marker>
+        <marker id="arrR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#9b2226"/>
+        </marker>
+      </defs>
+
+      <!-- Step 1: account creation -->
+      <rect x="20" y="20" width="200" height="66" rx="6" fill="#fbfbf8" stroke="#16171a" stroke-width="1.5"/>
+      <text x="120" y="46" text-anchor="middle" font-size="15" font-weight="700">Account created</text>
+      <text x="120" y="68" text-anchor="middle" font-size="12.5" fill="#5a564c">Store requests age info (§3)</text>
+
+      <!-- Step 2: verify age (decision diamond) -->
+      <polygon points="395,53 470,20 545,53 470,86" fill="#eef1f6" stroke="#1f3a5f" stroke-width="1.5"/>
+      <text x="470" y="50" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1f3a5f">Verify age</text>
+      <text x="470" y="67" text-anchor="middle" font-size="11.5" fill="#1f3a5f">category</text>
+
+      <!-- arrow 1->2 -->
+      <line x1="220" y1="53" x2="392" y2="53" stroke="#1f3a5f" stroke-width="1.6" marker-end="url(#arr)"/>
+
+      <!-- Adult branch -->
+      <rect x="700" y="20" width="200" height="66" rx="6" fill="#fbfbf8" stroke="#2f5d3a" stroke-width="1.5"/>
+      <text x="800" y="46" text-anchor="middle" font-size="15" font-weight="700" fill="#2f5d3a">Adult (18+)</text>
+      <text x="800" y="68" text-anchor="middle" font-size="12.5" fill="#5a564c">Proceeds to download</text>
+      <line x1="545" y1="53" x2="697" y2="53" stroke="#1f3a5f" stroke-width="1.6" marker-end="url(#arr)"/>
+      <text x="620" y="44" text-anchor="middle" font-size="11" font-weight="600" fill="#2f5d3a" font-family="'IBM Plex Mono',monospace">ADULT</text>
+
+      <!-- Minor branch down -->
+      <line x1="470" y1="86" x2="470" y2="128" stroke="#1f3a5f" stroke-width="1.6" marker-end="url(#arr)"/>
+      <text x="500" y="112" text-anchor="start" font-size="11" font-weight="600" fill="#9b2226" font-family="'IBM Plex Mono',monospace">MINOR (&lt;18)</text>
+
+      <!-- Step 3: parental account -->
+      <rect x="345" y="130" width="250" height="62" rx="6" fill="#fbfbf8" stroke="#16171a" stroke-width="1.5"/>
+      <text x="470" y="156" text-anchor="middle" font-size="14.5" font-weight="700">Link to parental account</text>
+      <text x="470" y="177" text-anchor="middle" font-size="12.5" fill="#5a564c">Verified adult, §3(a)(2)(A)</text>
+
+      <!-- Step 4: consent -->
+      <line x1="470" y1="192" x2="470" y2="226" stroke="#1f3a5f" stroke-width="1.6" marker-end="url(#arr)"/>
+      <rect x="320" y="228" width="300" height="70" rx="6" fill="#fbfbf8" stroke="#16171a" stroke-width="1.5"/>
+      <text x="470" y="255" text-anchor="middle" font-size="14.5" font-weight="700">Verifiable parental consent</text>
+      <text x="470" y="277" text-anchor="middle" font-size="12.5" fill="#5a564c">After disclosure of data use</text>
+      <text x="470" y="293" text-anchor="middle" font-size="12.5" fill="#5a564c">and age rating, §3(a)(2)(B)</text>
+
+      <!-- Step 5: download -->
+      <line x1="620" y1="263" x2="700" y2="263" stroke="#1f3a5f" stroke-width="1.6" marker-end="url(#arr)"/>
+      <rect x="700" y="232" width="200" height="62" rx="6" fill="#eef4ef" stroke="#2f5d3a" stroke-width="1.5"/>
+      <text x="800" y="258" text-anchor="middle" font-size="15" font-weight="700" fill="#2f5d3a">Download approved</text>
+      <text x="800" y="279" text-anchor="middle" font-size="12.5" fill="#5a564c">Store signals category</text>
+
+      <!-- Ongoing loop label -->
+      <text x="40" y="338" font-size="12" font-weight="700" font-family="'IBM Plex Mono',monospace" letter-spacing="0.12em" fill="#9b2226">ONGOING DUTIES</text>
+      <line x1="40" y1="348" x2="1020" y2="348" stroke="#c9c0ac" stroke-width="1"/>
+
+      <!-- Loop A: significant change -->
+      <rect x="40" y="362" width="470" height="52" rx="6" fill="#fdf3f3" stroke="#9b2226" stroke-width="1.3"/>
+      <text x="58" y="384" font-size="13.5" font-weight="700" fill="#9b2226">Significant change</text>
+      <text x="58" y="403" font-size="12" fill="#5a564c">New data use, monetization, or rating → re-obtain consent (§3(a)(3))</text>
+
+      <!-- Loop B: revocation -->
+      <rect x="550" y="362" width="470" height="52" rx="6" fill="#fdf3f3" stroke="#9b2226" stroke-width="1.3"/>
+      <text x="568" y="384" font-size="13.5" font-weight="700" fill="#9b2226">Parent revokes consent</text>
+      <text x="568" y="403" font-size="12" fill="#5a564c">Store must notify the developer; access ends (§3(a)(5))</text>
+    </svg>
+    <div class="src"><a href="https://www.congress.gov/bill/119th-congress/house-bill/3149/text" target="_blank">Congress.gov S.1586 / H.R.3149 §§3–4</a> · <a href="https://www.pillsburylaw.com/en/news-and-insights/app-store-accountability-act-texas.html" target="_blank">Pillsbury (7/2/25)</a></div>
+  </section>
+
+  <!-- 9 — ENFORCEMENT AND APPLICATION -->
+  <section class="slide">
+    <span class="slidenum">09</span>
+    <div class="kicker blue">The Bill</div>
+    <h2 style="font-size:2rem;margin-bottom:22px;">Enforcement and Application</h2>
+    <div class="cols-3">
+      <div class="card blue"><h3>Preemption (§7)</h3><p>The Act overrides state app-store laws, so developers follow one federal standard instead of a patchwork across Utah, Texas, Louisiana, and others.</p></div>
+      <div class="card blue"><h3>FTC Enforcement (§6)</h3><p>The Federal Trade Commission serves as primary enforcer. State attorneys general keep a secondary enforcement role.</p></div>
+      <div class="card blue"><h3>Safe Harbor &amp; Advisory (§5)</h3><p>Developers who rely in good faith on store-provided age and consent signals gain protection. An advisory committee recommends age-rating practices.</p></div>
+    </div>
+    <div class="cols" style="margin-top:26px;gap:38px;">
+      <div class="card"><h3>Data minimization (§3(a)(6))</h3><p>Stores may collect verification data only to confirm age, obtain consent, or keep compliance records, and must encrypt it.</p></div>
+      <div class="card"><h3>Status in Congress</h3><p>The House Energy and Commerce Committee advanced the bill on March 5, 2026, by a party-line vote of 26 to 23. It now awaits a full House vote.<span class="citno">76</span></p></div>
+    </div>
+    <div class="src"><a href="https://www.congress.gov/bill/119th-congress/house-bill/3149/text" target="_blank">Congress.gov H.R.3149 §§3, 5–7</a> · 76. <a href="https://energycommerce.house.gov/posts/full-committee-markup-recap-e-and-c-advances-eight-bills-to-the-full-house-of-representatives" target="_blank">House Energy &amp; Commerce Committee markup recap (3/5/26)</a></div>
+  </section>
+
+  <!-- 10 — OBLIGATIONS -->
+  <section class="slide">
+    <span class="slidenum">10</span>
+    <div class="kicker blue">The Bill</div>
+    <h2 style="font-size:1.9rem;margin-bottom:14px;">Obligations</h2>
+    <div class="cols">
+      <div>
+        <div class="label" style="margin-bottom:10px;">App Store Obligations (§3)</div>
+        <ul class="dot">
+          <li>Request age information and verify each user's age category at account creation, using a commercially reasonable method.</li>
+          <li>Affiliate a minor's account with a parental account, then obtain verifiable parental consent before any download or purchase.</li>
+          <li>Provide the age category and consent status to developers, and notify them when a parent revokes consent.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:10px;">App Developer Obligations (§4)</div>
+        <ul class="dot">
+          <li>Verify the user's age category through the store's API before download, and confirm parental consent for minors.</li>
+          <li>Notify the store of any significant change to the app.</li>
+        </ul>
+        <div class="scale" style="margin-top:22px;">
+          <div><div class="age">&lt;13</div><div class="name">Young child</div></div>
+          <div><div class="age">13–15</div><div class="name">Child</div></div>
+          <div><div class="age">16–17</div><div class="name">Teen</div></div>
+          <div><div class="age">18+</div><div class="name">Adult</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="src"><a href="https://www.congress.gov/bill/119th-congress/house-bill/3149/text" target="_blank">Congress.gov H.R.3149 §§3–4</a> · <a href="https://www.cnn.com/2025/05/01/tech/proposed-legislation-app-store-age-verification-lee-james" target="_blank">CNN Business (5/1/25)</a></div>
+  </section>
+
+  <!-- 10 — RAMIFICATIONS DIVIDER -->
+  <section class="slide" style="justify-content:center;background:var(--ink);color:var(--paper);">
+    <div class="kicker" style="color:#e0a3a5;">Part Three</div>
+    <h1 style="font-size:3.2rem;max-width:18ch;color:var(--paper);">Potential Ramifications</h1>
+    <p class="lede" style="margin-top:24px;color:#cfc8b8;">Many agree that minors face real harm online that, left unchecked, can lead to serious consequences. Those who oppose the bill maintain that it raises First Amendment concerns and imposes too great a liability.</p>
+  </section>
+
+  <!-- 12 — FIRST AMENDMENT -->
+  <section class="slide">
+    <span class="slidenum">12</span>
+    <div class="kicker">Ramifications</div>
+    <h2 style="font-size:2rem;margin-bottom:16px;">The First Amendment Question</h2>
+    <p class="lede" style="margin-bottom:16px;">In <i>McIntyre v. Ohio Elections Commission</i>, 514 U.S. 334 (1995), the Supreme Court held that the First Amendment protects an author's choice to speak anonymously, and that a law burdening that choice must survive exacting scrutiny.<span class="citno">68</span> Age verification tests whether checking age stays separate from checking identity.</p>
+    <ul class="dot">
+      <li>A verifier can combine age data with public or leaked records to identify the user.</li>
+      <li>When a download traces back to a person, that person may avoid lawful but sensitive content, which the courts call a chilling effect.</li>
+      <li>That chilling-effect argument already defeated several state age-verification laws.<span class="citno">14</span></li>
+    </ul>
+    <div class="src">14. <a href="https://www.americanactionforum.org/insight/the-app-store-accountability-act-and-age-verification-mandates/" target="_blank">AAF / Westling (5/7/25)</a> · 68. <a href="https://supreme.justia.com/cases/federal/us/514/334/" target="_blank">McIntyre v. Ohio Elections Comm'n, 514 U.S. 334 (1995)</a></div>
+  </section>
+
+  <!-- 13 — SUPPORT AND OPPOSITION -->
+  <section class="slide">
+    <span class="slidenum">13</span>
+    <div class="kicker">Ramifications</div>
+    <h2 style="font-size:1.85rem;margin-bottom:16px;">Support and Opposition</h2>
+    <div class="vs">
+      <div class="side">
+        <div class="label" style="color:var(--green);margin-bottom:6px;">Supporters</div>
+        <ul class="brief check">
+          <li>Targeting stores imposes the <b>least burden</b> for age checks at scale.</li>
+          <li>Modern age-assurance confirms a category <b>without</b> an ID.</li>
+          <li>The rule applies to every store alike, so it reads as <b>content-neutral</b>.</li>
+          <li>It rests on <b>contract law</b>, not on speech.</li>
+          <li>Meta, X, Snap, and Pinterest <b>endorse</b> it; 88% of parents agree.</li>
+        </ul>
+      </div>
+      <div class="divider"></div>
+      <div class="side">
+        <div class="label" style="color:var(--accent);margin-bottom:6px;">Opposition</div>
+        <ul class="brief check opp">
+          <li>It forces <b>every user</b>, adults included, to surrender anonymity.</li>
+          <li>Verification data invites <b>breach, sale, or misuse</b>.</li>
+          <li>It burdens a <b>First Amendment</b> right to anonymous access.</li>
+          <li>Courts already <b>struck down</b> comparable state laws.</li>
+          <li>Apple and Google <b>oppose</b> a duty to verify every user.</li>
+        </ul>
+        <div class="qcol">
+          <div class="q">
+            <div class="who">Apple</div>
+            <p>Warns that stores would have to collect and keep sensitive ID data for <span style="font-style:normal;">"every"</span> user, even someone downloading a weather or sports app.<span class="citno" style="font-style:normal;">64</span></p>
+          </div>
+          <div class="q">
+            <div class="who">Google</div>
+            <p>Called an equivalent state bill <span style="font-style:normal;">"one of the most extreme age-verification regimes"</span> its policy team had seen.<span class="citno" style="font-style:normal;">64</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="src">64. <a href="https://www.yoti.com/blog/texas-app-store-accountability-act-age-assurance/" target="_blank">Yoti, quoting Apple &amp; Google statements (7/1/25)</a> · <a href="https://www.americanactionforum.org/insight/the-app-store-accountability-act-and-age-verification-mandates/" target="_blank">AAF / Westling (5/7/25)</a></div>
+  </section>
+
+  <!-- 13 — POSSIBLE SOLUTIONS -->
+  <section class="slide">
+    <span class="slidenum">14</span>
+    <div class="kicker green">Possible Solutions</div>
+    <h2 style="font-size:1.9rem;margin-bottom:14px;">Possible Solutions</h2>
+    <p class="lede" style="margin-bottom:24px;">A court strikes a law when a less-restrictive option exists. So the strongest fixes narrow the bill, protect the data it collects, and prove the mandate is necessary.</p>
+    <div class="cols-3">
+      <div class="card green"><h3>01 · Privacy by Design</h3><p>Require methods that confirm an age category without revealing identity, such as zero-knowledge proofs or on-device biometric age estimation. The store returns only a yes-or-no age signal, so it never collects a government ID or birthdate, which is the data point critics fear will be breached or misused.</p></div>
+      <div class="card green"><h3>02 · Data Guardrails</h3><p>Cap how long a verifier may keep any data, ban its resale or reuse for advertising, mandate industry-standard encryption, and require deletion once verification finishes. Real per-violation penalties give the limits teeth and narrow the bill's reach to its stated purpose.</p></div>
+      <div class="card green"><h3>03 · Prove Necessity</h3><p>Build a legislative record showing why existing Apple and Google parental controls fall short of the goal. Strict scrutiny turns on necessity and narrow tailoring, so the sponsors must demonstrate that no less-restrictive tool already achieves what the mandate seeks.</p></div>
+    </div>
+    <div class="src"><a href="https://www.americanactionforum.org/insight/the-app-store-accountability-act-and-age-verification-mandates/" target="_blank">AAF / Westling (5/7/25)</a>, on age-assurance and double-blind verification</div>
+  </section>
+
+  <!-- 14 — TAKEAWAYS -->
+  <section class="slide">
+    <span class="slidenum">15</span>
+    <h2 style="font-size:2.1rem;margin-bottom:24px;">Conclusion</h2>
+    <div class="timeline">
+      <div class="tl"><div class="when">01</div><div class="what"><b>The shift is structural.</b> The Act moves responsibility from parents and individual apps onto the store, a new model of platform governance.</div></div>
+      <div class="tl"><div class="when">02</div><div class="what"><b>The harm convinces; the remedy divides.</b> The Snap and TikTok litigation shows why lawmakers want to act, while the First Amendment remains the strongest objection to how the bill verifies age in an app store.</div></div>
+      <div class="tl"><div class="when">03</div><div class="what"><b>The courts will decide its fate.</b> Because judges have already struck down comparable state laws, the same First Amendment challenge may determine whether this bill survives.</div></div>
+    </div>
+    <div class="footer-tag">App Store Accountability Act</div>
+  </section>
+
+  <!-- 15 — DISCUSSION -->
+  <section class="slide cover" style="justify-content:center;">
+    <h1 style="font-size:3.6rem;max-width:20ch;">Questions &amp; Discussion</h1>
+    <div class="meta">
+      <span>Emma Richardson</span>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
